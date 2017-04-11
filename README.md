@@ -9,7 +9,7 @@ A smartphone microscope sample holder design!
 The idea is to have an easy to handle, orientable sample holder
 for the mu-spim.
 
-### Yeah early rendering
+### Current state
 
 ![early view](png/mush.png)
 
