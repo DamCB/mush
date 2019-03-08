@@ -6,7 +6,7 @@ e_cl = 1;
 d1_cl = sqrt(pow(RC_cl, 2) - pow(phi_cl/2, 2));
 
 
-$fn = 100;
+$fn = 24;
 
 module contact_lens(phi_cl, RC_cl, e_cl, d1_cl){
      translate([0, 0, RC_cl-e_cl])
@@ -73,8 +73,8 @@ theta=30;
 
 piston_z = 2.;
 center_z = 5;
-sphere_phi_in = 30;
-sphere_phi_out = 32;
+sphere_phi_in = 20;
+sphere_phi_out = 23.5;
 
 
 module movement_sphere(){
