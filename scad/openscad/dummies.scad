@@ -6,7 +6,7 @@ e_cl = 1;
 d1_cl = sqrt(pow(RC_cl, 2) - pow(phi_cl/2, 2));
 
 
-$fn = 24;
+$fn = 36;
 
 module contact_lens(phi_cl, RC_cl, e_cl, d1_cl){
      translate([0, 0, RC_cl-e_cl])
@@ -72,9 +72,9 @@ module lolipop(theta){
 theta=30;
 
 piston_z = 2.;
-center_z = 5;
+center_z = 0;
+sphere_phi_out = 23;
 sphere_phi_in = 20;
-sphere_phi_out = 23.5;
 
 
 module movement_sphere(){
@@ -88,43 +88,36 @@ difference() {
      }
 }
 
-
-module sphere_band(w=10){
-     difference(){
-	  movement_sphere();
-	  union(){
-	  translate([20+w/2, 0, 10])
-	       cube([40, 40, 40], center=true);
-	  translate([-20-w/2, 0, 10])
-	       cube([40, 40, 40], center=true);
-	  }
+module pizza_slice(r=30, w=10, theta=60){
+     hull(){
+          rotate(theta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
+          cylinder(h=r, r=w/2);
+          rotate(-theta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
      }
-
 }
+
 
 module rail(){
      difference(){
-	  difference(){
-	       sphere_band(15);
-	       difference(){
-		    union(){
-			 translate([0, 0, 0.3]) sphere_band(6);
-			 translate([0, 0, -0.3]) sphere_band(6);
-		    }
-		    translate([0, 0, -12])
-			 cube([40, 40, 40], center=true);
-	       }
-	  }
+           movement_sphere();
+           pizza_slice(r=sphere_phi_out/1.9, w=10, theta=160);
      }
 }
 
-module knob(h, d_in, e){
-     difference(){
-	  cylinder(h=h, d=d_in+e, center=true);
-	  cylinder(h=h+1, d=d_in, center=true);
-	  }
+module magnet(){
+     $fn=20;
+     cylinder(h=1.05, r=1.05, center=true);
+}
 
+
+module knob(h, d_in, e){
+     translate([0, 0, -h/2])
+          difference(){
+          cylinder(h=h, d=d_in+e, center=true);
+          cylinder(h=h+1, d=d_in, center=true);
      }
+
+}
 
 module turret(){
      union(){
