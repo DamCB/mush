@@ -4,12 +4,12 @@ sphere_phi_in = 20;
 sphere_phi_out = 24;
 
 phi_knob_in = 20;
-phi_knob_out = 25;
+phi_knob_out = 25.4;
 w_knob = (phi_knob_out - phi_knob_in)/2;
 e_knob = 3;
 hh = e_knob/3-0.1;
 
-
+$fn = 100;
 
 module turret(){
      difference(){
