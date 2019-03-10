@@ -77,7 +77,7 @@ sphere_phi_out = 23;
 sphere_phi_in = 20;
 
 
-module movement_sphere(){
+module movement_sphere(phi_in=sphere_phi_in, phi_out=sphere_phi_out){
 translate([0, 0, center_z])
 difference() {
      difference() {
@@ -88,11 +88,11 @@ difference() {
      }
 }
 
-module pizza_slice(r=30, w=10, theta=60){
+module pizza_slice(r=30, w=10, dtheta=60){
      hull(){
-          rotate(theta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
+          rotate(dtheta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
           cylinder(h=r, r=w/2);
-          rotate(-theta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
+          rotate(-dtheta/2, [0, 1, 0]) cylinder(h=r, r=w/2);
      }
 }
 
@@ -104,16 +104,17 @@ module rail(){
      }
 }
 
+//https://superaimants.fr/disques-neodyme-fr/aimant-disque-o-1-x-1-mm-n50-ni-cu-ni-fr/
 module magnet(){
      $fn=20;
-     cylinder(h=1.05, r=1.05, center=true);
+     cylinder(h=1.1, r=0.55, center=true);
 }
 
 
-module knob(h, d_in, e){
+module ring(h, d_in, d_out){
      translate([0, 0, -h/2])
           difference(){
-          cylinder(h=h, d=d_in+e, center=true);
+          cylinder(h=h, d=d_out, center=true);
           cylinder(h=h+1, d=d_in, center=true);
      }
 
