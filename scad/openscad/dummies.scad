@@ -6,8 +6,6 @@ e_cl = 1;
 d1_cl = sqrt(pow(RC_cl, 2) - pow(phi_cl/2, 2));
 
 
-$fn = 36;
-
 module contact_lens(phi_cl, RC_cl, e_cl, d1_cl){
      translate([0, 0, RC_cl-e_cl])
      difference(){
@@ -81,8 +79,8 @@ module movement_sphere(phi_in=sphere_phi_in, phi_out=sphere_phi_out){
 translate([0, 0, center_z])
 difference() {
      difference() {
-	  sphere(sphere_phi_out/2);
-	  sphere(sphere_phi_in/2);
+	  sphere(phi_out/2);
+	  sphere(phi_in/2);
      }
      translate([0, 0, -20]) cube([40, 40, 40], center=true);
      }

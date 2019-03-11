@@ -1,23 +1,29 @@
 use <dummies.scad>;
+use <grip.scad>;
 
-sphere_phi_in = 20;
-sphere_phi_out = 24;
+phi_sphere = 20;
+e_sphere = 2.;
+phi_sphere_in = phi_sphere - e_sphere;
+phi_sphere_out = phi_sphere + e_sphere;
 
-phi_knob_in = 20;
+phi_knob_in = phi_sphere_in;
 phi_knob_out = 25.4;
 w_knob = (phi_knob_out - phi_knob_in)/2;
 e_knob = 3;
 hh = e_knob/3-0.1;
-
-$fn = 100;
+clear = 2;
+$fn = 36;
 
 module turret(){
      difference(){
           union(){
-               movement_sphere();
+               movement_sphere(phi_sphere_in, phi_sphere_out);
                ring(e_knob, phi_knob_in, phi_knob_out);
           }
-          pizza_slice(r=25, w=10, dtheta=120);
+          sphere_hole(e=e_sphere,
+                      phi_sphere=phi_sphere,
+                      clear=clear,
+                      aperture=180.1);
      }
 }
 
@@ -51,8 +57,6 @@ module left_turret(){
      }
 }
 
-left_turret();
-
 module right_turret(){
      difference(){
           union(){
@@ -64,7 +68,7 @@ module right_turret(){
                     translate([-phi_knob_in/2-w_knob/2, 0, 0.3])
                          cube([w_knob+0.4, w_knob+0.4, hh+1.8], center=true);
                     translate([-phi_knob_in/2-w_knob/2, 0, -e_knob+hh/2])
-                         cube([w_knob+0.2, w_knob+0.2, hh+0.3], center=true);
+                         cube([w_knob+0.4, w_knob+0.4, hh+0.3], center=true);
                }
                translate([-phi_knob_in/2-w_knob/2, 0., -2*hh+0.3])
                     cylinder(d=w_knob, h=hh, center=true, $fn=30);
@@ -76,3 +80,17 @@ module right_turret(){
 
 
 right_turret();
+/* right_grip(e=e_sphere, */
+/*            phi_sphere=phi_sphere, */
+/*            shift=clear/2); */
+
+
+translate([-phi_knob_in/2-w_knob/2, 0, 0])
+rotate([0, 0, -30])
+translate([phi_knob_in/2+w_knob/2, 0, 0])
+union(){
+     left_turret();
+     /* left_grip(e=e_sphere, */
+     /*           phi_sphere=phi_sphere, */
+     /*           shift=clear/2); */
+}
