@@ -1,13 +1,13 @@
 use <dummies.scad>;
 use <grip.scad>;
 
-phi_sphere = 20;
+phi_sphere = 26;
 e_sphere = 2.;
 phi_sphere_in = phi_sphere - e_sphere;
 phi_sphere_out = phi_sphere + e_sphere;
 
 phi_knob_in = phi_sphere_in;
-phi_knob_out = 25.4;
+phi_knob_out = phi_knob_in + 6;
 w_knob = (phi_knob_out - phi_knob_in)/2;
 e_knob = 3;
 hh = e_knob/3-0.1;
@@ -86,7 +86,7 @@ right_turret();
 
 
 translate([-phi_knob_in/2-w_knob/2, 0, 0])
-rotate([0, 0, -30])
+rotate([0, 0, 0])
 translate([phi_knob_in/2+w_knob/2, 0, 0])
 union(){
      left_turret();
