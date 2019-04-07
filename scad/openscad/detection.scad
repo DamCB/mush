@@ -1,5 +1,5 @@
 use <dummies.scad>;
-$fn = 240;
+//$fn = 240;
 
 module camera(){
 // http://www.arducam.com/spy-camera-raspberry-pi/
@@ -45,7 +45,6 @@ module light_rig(phi_in=12){
           union(){
                translate([0, 0, -0.5]) rotate_extrude(){
                     translate([phi_in/2, 0, 0.]) circle(0.5);
-
                }
                ring(1, phi_in, 24);
           }

@@ -15,7 +15,7 @@ w_knob = (phi_knob_out - phi_knob_in)/2;
 e_knob = 4;
 hh = e_knob/3-0.1;
 clear = 2;
-$fn = 100;
+$fn = 32;
 
 
 right_turret();

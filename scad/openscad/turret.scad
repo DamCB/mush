@@ -14,11 +14,22 @@ hh = e_knob/3-0.1;
 clear = 2;
 $fn = 36;
 
+
+module turret_base(){
+     union(){
+          ring(e_knob, phi_knob_in, phi_knob_out);
+          // SM1Z specific
+          translate([0, 0, -2.2]) ring(2, 28.5, phi_knob_out);
+          translate([0, 0, -3]) ring(3, 28.5, 31.5);
+     }
+}
+
+
 module turret(){
      difference(){
           union(){
                movement_sphere(phi_sphere_in, phi_sphere_out);
-               ring(e_knob, phi_knob_in, phi_knob_out);
+               turret_base();
           }
           sphere_hole(e=e_sphere,
                       phi_sphere=phi_sphere,
@@ -26,7 +37,6 @@ module turret(){
                       aperture=175);
      }
 }
-
 
 module half_turret(){
      difference(){
@@ -86,7 +96,7 @@ right_turret();
 
 
 translate([-phi_knob_in/2-w_knob/2, 0, 0])
-rotate([0, 0, 0])
+rotate([0, 0, -30])
 translate([phi_knob_in/2+w_knob/2, 0, 0])
 union(){
      left_turret();
