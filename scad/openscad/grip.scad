@@ -23,7 +23,7 @@ module _upper_grip(){
      union(){
           difference(){
                union(){
-                    translate([-1.25, 0.5]) circle(0.25);
+                    translate([-1.25, 0.5]) circle(1);
                     translate([-1.5, 0.5]) square(0.5);
                     hull(){
                          translate([-1., 1.]) circle(0.5);
