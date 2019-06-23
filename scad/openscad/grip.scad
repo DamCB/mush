@@ -54,12 +54,18 @@ module _grip(e=2.){
 
 module left_grip(e=2., phi_sphere=20., shift=1.){
      angle = (2*(shift+1.75) / phi_sphere) * 180/3.1415926;
-
-          rotate([0, 6, 0]) rotate([0, 0, 90]) rotate([0, -90, 0])
-          rotate_extrude(angle=12){
-               rotate([0, 0, angle])
-               translate([phi_sphere/2, 0])
-                    rotate([0, 0, -90]) _grip(e);
+     difference(){
+          union(){
+               rotate([0, 10, 0]) rotate([0, 0, 90]) rotate([0, -90, 0])
+                    rotate_extrude(angle=20){
+                    rotate([0, 0, angle])
+                         translate([phi_sphere/2, 0])
+                         rotate([0, 0, -90]) _grip(e);}
+          }
+          union(){
+               rotate([0, 0, 180]) translate([2.5, -15, 0]) rotate([0, -10, 0]) cube([30, 30, 30]);
+               translate([2.2, -15, 0]) rotate([0, -10, 0]) cube([30, 30, 30]);
+          }
      }
 }
 
@@ -89,8 +95,9 @@ module _hole(e=2., phi_sphere=20., clear=4.)
           }
      }
 }
-//right_grip(e=2., phi_sphere=20., shift=3);
-//left_grip(e=2., phi_sphere=20., shift=3);
+$fn = 360;
+right_grip(e=2., phi_sphere=20., shift=3);
+left_grip(e=2., phi_sphere=20., shift=3);
 
 module sphere_hole(e=2, phi_sphere=20., clear=1, aperture=120){
      rotate([0, aperture/2, 0])

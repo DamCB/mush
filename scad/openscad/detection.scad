@@ -56,7 +56,7 @@ module light_rig(phi_in=12){
 
 module detection(){
      translate([0, 0, -18]) union() {
-          camera_stand();
+          %camera_stand();
           camera();
           for (i=[0:3])
                rotate(i*90) translate([0, 8, 4.1]) cylinder(d=4, h=12.);
@@ -64,9 +64,9 @@ module detection(){
      lens_75();
 }
 
-
-light_rig(phi_in=12);
+$fn=100;
+//light_rig(phi_in=12);
 detection();
 
 //leds0202();
-translate([0, 0, -18] )ring(2, 22.9, 25.4);
+//translate([0, 0, -18] )ring(2, 22.9, 25.4);
