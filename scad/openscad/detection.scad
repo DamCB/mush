@@ -1,5 +1,5 @@
 use <dummies.scad>;
-//$fn = 240;
+$fn = 360;
 
 module camera(){
 // http://www.arducam.com/spy-camera-raspberry-pi/
@@ -21,9 +21,10 @@ module camera(){
 
 module camera_stand(){
      difference(){
-          cylinder(d=22.9, h=4);
+          cylinder(d=22.9, h=6);
           translate([0, (11.3-8.5)/2, -0.9]) cube([8.6, 11.4, 3], center=true);
-          translate([0, 0, 1.5]) cylinder(d=8, h=5);
+          translate([0, 0, -2.]) cylinder(d=8, h=8);
+          translate([0, 0, 4]) cylinder(d=9.5, h=5);
      }
 }
 
@@ -65,8 +66,10 @@ module detection(){
 }
 
 
-light_rig(phi_in=12);
-detection();
+/* light_rig(phi_in=12); */
+/* detection(); */
 
 //leds0202();
-translate([0, 0, -18] )ring(2, 22.9, 25.4);
+//translate([0, 0, -18] )ring(2, 22.9, 25.4);
+translate([0, 0, -18]) camera_stand();
+//lens_75();
