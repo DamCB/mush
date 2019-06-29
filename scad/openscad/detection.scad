@@ -1,5 +1,5 @@
 use <dummies.scad>;
-$fn = 360;
+$fn = 36;
 
 module camera(){
 // http://www.arducam.com/spy-camera-raspberry-pi/
@@ -21,10 +21,10 @@ module camera(){
 
 module camera_stand(){
      difference(){
-          cylinder(d=22.9, h=6);
+          cylinder(d=26, h=8);
           translate([0, (11.3-8.5)/2, -0.9]) cube([8.6, 11.4, 3], center=true);
-          translate([0, 0, -2.]) cylinder(d=8, h=8);
-          translate([0, 0, 4]) cylinder(d=9.5, h=5);
+          translate([0, 0, -2.]) cylinder(d=8, h=12);
+          translate([0, 0, 2]) cylinder(d=9.5, h=5);
      }
 }
 
@@ -34,6 +34,29 @@ module lens_75(){
           translate([0, 0, -3.2]) ring(3.2, 7.2, 9.2);
      }
 }
+
+module leds_sequins(){
+     for (i=[0:5])
+          rotate([0, 0, 60*i]) translate([-10, 0, -1]) sequin();
+
+
+}
+
+//
+module sequin(){
+     difference() {
+          minkowski(){
+               cube([1, 7, 2], center=true);
+               rotate([0, 90, 0]) cylinder(r=1, h=1, center=true);
+          }
+          translate([-2, 3.5, 0]) rotate([0, 90, 0]) cylinder(r=0.5, h=4);
+          translate([-2, -3.5, 0]) rotate([0, 90, 0]) cylinder(r=0.5, h=4);
+     }
+     translate([1., 0, 1]) cube([0.4, 0.4, 0.4], center=true);
+}
+
+
+
 
 module leds0202(ofst=0){
      for (i=[0:7])
@@ -56,20 +79,28 @@ module light_rig(phi_in=12){
 
 
 module detection(){
-     translate([0, 0, -18]) union() {
+     translate([0, 0, -17.65]) union() {
           camera_stand();
           camera();
-          for (i=[0:3])
-               rotate(i*90) translate([0, 8, 4.1]) cylinder(d=4, h=12.);
      }
-     lens_75();
 }
 
 
 /* light_rig(phi_in=12); */
-/* detection(); */
-
+/* color(c=[0.2, 0.0, 0.1, 0.3]) { */
+/* difference(){ */
+/*      union(){ */
+/*           detection(); */
+/*           lens_75(); */
+/*      } */
+/*      translate([-30, 0, 0]) cube([60, 60, 60], center=true); */
+/* } */
+/* } */
 //leds0202();
 //translate([0, 0, -18] )ring(2, 22.9, 25.4);
-translate([0, 0, -18]) camera_stand();
-//lens_75();
+//translate([0, 0, -18]) camera_stand();
+color([0.1, 0.1, 0.6]) {leds_sequins();}
+
+
+detection();
+lens_75();
