@@ -109,15 +109,6 @@ module detection(){
 }
 
 
-/* difference(){ */
-/*      union(){ */
-/*           color(c=[0.2, 0.0, 0.1, 0.3]) {detection();} */
-/*           color(c=[0.8, 0.0, 0.1, 0.3]) {lens_75();} */
-/*      } */
-/*      translate([-30, 0, 0]) cube([60, 60, 60], center=true); */
-/* } */
-
-
 difference(){
      union(){
 
@@ -125,9 +116,8 @@ color([0.1, 0.1, 0.6]) {translate([0, 0, 0.1]) leds_sequins();}
 sequins_stand();
 color(c=[0.4, 0.8, 0.4]) {detection();}
 
-color(c=[0.8, 0.1, 0.1]) {lens_75();}
+%color(c=[0.8, 0.1, 0.1]) {lens_75();}
 translate([0, 0, 2.1]) ring(1, 22.9, phi_ext);
-
      }
      translate([-30, 0, 0]) cube([60, 60, 60], center=true);
 }
