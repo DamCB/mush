@@ -11,8 +11,8 @@ module camera(){
 // Not the same cam exactly, but view angle is given
 // as 54x41°, i.e 0.94 rad
      translate([0, 0, 2]) cylinder(d=7.4, h=3);
-     translate([0, 1.5, 0.5]) cube([8.5, 11.3, 3], center=true);
-     translate([0, 7, -2.2])
+     translate([0, 1.5, 1.5]) cube([8.5, 11.3, 3], center=true);
+     translate([0, 7, -1.2])
           union(){
           rotate([0, 0, -90]) translate([0, 3.75, 0]) rotate([90, 0, 0])
                difference(){
@@ -42,8 +42,9 @@ module base_plate(){
 module camera_stand(){
      difference(){
           base_plate();
-          translate([0, 1.5, 0.5]) cube([8.6, 11.6, 3], center=true);
+          translate([0, 2.5, 1.5]) cube([8.6, 13.6, 3], center=true);
           translate([0, 0, -2]) cylinder(d=7.8, h=12);
+          translate([0, 0, 3]) ring(6, 22, 30);
      }
 }
 
@@ -116,12 +117,20 @@ module detection(){
 /*      translate([-30, 0, 0]) cube([60, 60, 60], center=true); */
 /* } */
 
+
+difference(){
+     union(){
+
 color([0.1, 0.1, 0.6]) {translate([0, 0, 0.1]) leds_sequins();}
 sequins_stand();
 color(c=[0.4, 0.8, 0.4]) {detection();}
 
 color(c=[0.8, 0.1, 0.1]) {lens_75();}
-translate([0, 0, 2.1]) ring(1, 20, phi_ext);
+translate([0, 0, 2.1]) ring(1, 22.9, phi_ext);
+
+     }
+     translate([-30, 0, 0]) cube([60, 60, 60], center=true);
+}
 
 
 //detection();
