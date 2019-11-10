@@ -1,8 +1,8 @@
 use <dummies.scad>;
 use <grip.scad>;
 
-phi_sphere = 38;
-e_sphere = 3.;
+phi_sphere = 60;
+e_sphere = 4.;
 phi_sphere_in = phi_sphere - e_sphere;
 phi_sphere_out = phi_sphere + e_sphere;
 
@@ -19,8 +19,8 @@ module turret_base(){
      union(){
           ring(e_knob, phi_knob_in, phi_knob_out);
           // SM1Z specific
-          translate([0, 0, -2.2]) ring(2, 28.5, phi_knob_out);
-          translate([0, 0, -3]) ring(3, 28.5, 31.5);
+          translate([0, 0, -2.2]) ring(2, 40., phi_knob_out);
+          translate([0, 0, -3]) ring(3,  40., 31.5);
      }
 }
 
@@ -41,7 +41,7 @@ module turret(){
 module half_turret(){
      difference(){
           turret();
-          translate([-25, -0.05, -25]) cube([50, 50, 50]);
+          translate([-30, -0.05, -30]) cube([60, 60, 60]);
      }
 }
 
@@ -89,7 +89,7 @@ module right_turret(){
 }
 
 
-right_turret();
+//right_turret();
 /* right_grip(e=e_sphere, */
 /*            phi_sphere=phi_sphere, */
 /*            shift=clear/2); */
