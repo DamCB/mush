@@ -146,8 +146,8 @@ module camera_stand(){
 module camera_arc(){
      rotate ([0, 90, 0]) difference(){
      union(){
-          translate([0, 0, 0]) difference(){
-               cylinder(d=sphere_phi_out, h=stand_width, center=true);
+          difference(){
+               translate([-5, 0, 0]) cylinder(d=sphere_phi_out, h=stand_width, center=true);
                cylinder(d=sphere_phi_in, h=stand_width+2, center=true);
                translate([0, -50, -50]) cube([100, 100, 100]);
           }
@@ -155,26 +155,30 @@ module camera_arc(){
                cylinder(h=thickness, d=stand_width, center=true);
           translate([0,  -shift, 0]) rotate([90, 0, 0])
                cylinder(h=thickness, d=stand_width, center=true);
+          translate([-sphere_phi_in/2-6, -15, -stand_width/2]) cube([10, 30, stand_width]);
      }
-     rotate([90, 0, 0 ]) cylinder(d=6.1, h=sphere_phi_out+2, center=true);
-     rotate([0, 90, 0 ]) cylinder(d=6.1, h=sphere_phi_out+2, center=true);
-     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+2, center=true);
-     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+2, center=true);
+     translate([-sphere_phi_out/2-11, -20, -stand_width/2-1]) cube([10, 40, stand_width+2]);
+     rotate([0, 90, 0 ]) cylinder(d=6.1, h=sphere_phi_out+12, center=true);
+     rotate([90, 0, 0 ]) cylinder(d=6.1, h=sphere_phi_out+12, center=true);
+     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+8, center=true);
+     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+8, center=true);
      }
 }
 
 
 module focus_knob(){
- %translate([0, 0, 13]) cylinder(d=6, h=12, center=true);
+
+     translate([0, 0, 13]) cylinder(d=6, h=12, center=true);
+     translate([0, 0, 20.5]) difference(){
+          cylinder(d=25, h=6, center=true);
+          for (i = [0: 30: 330]){
+               rotate([0, 0, i]) translate([14, 0, -4]) cylinder(d=6, h=8);
+               }
+     }
+
  rotate([0, 0, 180]) hex_adjustment_screw();
 }
 
-translate([0, 0, 20]) focus_knob();
-camera_arc();
-translate([0, -8, 26]) cylinder(d=4, h=12.7, center=true);
-translate([0,  8, 26]) cylinder(d=4, h=12.7, center=true);
-
-translate([0, 0, 20]) adjuster_nut();
 
 
 module lens_75(){
@@ -209,17 +213,22 @@ module sequin(){
 lens_bfl = 5.2;
 
 module detection(){
+     translate([0, 0, 20]) focus_knob();
+     translate([0, -8, 24]) cylinder(d=4, h=12.7, center=true);
+     translate([0,  8, 24]) cylinder(d=4, h=12.7, center=true);
+
+     translate([0, 0, 20]) adjuster_nut();
+     camera_arc();
      translate([0, 0, 0]) rotate([0, 0, 0]) union() {
           translate([0, 0, 10]) union(){
                camera_stand();
-               %camera();
+               camera();
           }
-          %translate([0, 0, lens_bfl]) union(){
+          translate([0, 0, lens_bfl]) union(){
                lens_75_stand();
                lens_75();
           }
      }
 }
-
 
 detection();
