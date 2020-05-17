@@ -27,7 +27,7 @@ import time
 Builder.load_string(
     """
 <CameraClick>:
-    orientation: 'horizontal'
+    orientation: 'vertical'
     Camera:
         id: camera
         resolution: (480, 800)
@@ -36,11 +36,11 @@ Builder.load_string(
         text: 'Play'
         on_press: camera.play = not camera.play
         size_hint_y: None
-        height: '48dp'
+        height: '20dp'
     Button:
         text: 'Capture'
         size_hint_y: None
-        height: '48dp'
+        height: '20dp'
         on_press: root.capture()
 """
 )
