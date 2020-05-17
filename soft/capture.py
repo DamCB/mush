@@ -30,17 +30,17 @@ Builder.load_string(
     orientation: 'vertical'
     Camera:
         id: camera
-        resolution: (480, 800)
+        resolution: (800, 480)
         play: False
     ToggleButton:
         text: 'Play'
         on_press: camera.play = not camera.play
         size_hint_y: None
-        height: '20dp'
+        height: '40dp'
     Button:
         text: 'Capture'
         size_hint_y: None
-        height: '20dp'
+        height: '40dp'
         on_press: root.capture()
 """
 )
