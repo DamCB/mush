@@ -1,5 +1,4 @@
 use <dummies.scad>;
-$fn = 36;
 
 sphere_phi_out = 72;
 sphere_phi_in = 62;
@@ -53,12 +52,6 @@ module camera(){
           translate([0, 1.5, 1.5]) cube([8.5, 11.3, 3], center=true);
           translate([0, 7, -1.2])
                union(){
-               /* rotate([0, 0, -90]) translate([0, 3.75, 0]) rotate([90, 0, 0]) */
-               /*      difference(){ */
-               /*      cylinder(d=4, h=7.5); */
-               /*      translate([0, 0, -1]) cylinder(d=3.6, h=9, $fn=36); */
-               /*      translate([0, -5, -1]) cube(10); */
-               /* } */
                translate([-3.75, 0, 1.]) cube([7.5, 10, 0.2], center=false);
           }
      }
@@ -69,7 +62,7 @@ module camera(){
 // This is a crudely simply metric thread
 // not ISO
 module metric_thread(diameter=8, pitch=1, length=1,
-    internal=false, n_starts=1, $fn=36)
+    internal=false, n_starts=1)
 {
    // Number of turns needed.
    n_turns = floor(length/pitch);
@@ -104,7 +97,7 @@ module hex_adjustment_screw
 	    metric_thread(3, 0.25, 7.6);
 	    translate([0, 0, -0.1]) cylinder(r=0.75, h=2.1, $fn=6);
 	}
-	translate([0, 0, 7.]) sphere(d=1.5, $fn=100);
+	translate([0, 0, 7.]) sphere(d=1.5);
     }
 }
 
@@ -155,20 +148,24 @@ module camera_arc(){
                cylinder(h=thickness, d=stand_width, center=true);
           translate([0,  -shift, 0]) rotate([90, 0, 0])
                cylinder(h=thickness, d=stand_width, center=true);
-          translate([-sphere_phi_in/2-6, -15, -stand_width/2]) cube([10, 30, stand_width]);
+          translate([-sphere_phi_in/2-6, -15, -stand_width/2])
+               cube([10, 30, stand_width]);
      }
      translate([-sphere_phi_out/2-11, -20, -stand_width/2-1]) cube([10, 40, stand_width+2]);
-     rotate([0, 90, 0 ]) cylinder(d=6.1, h=sphere_phi_out+12, center=true);
-     rotate([90, 0, 0 ]) cylinder(d=6.1, h=sphere_phi_out+12, center=true);
-     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+8, center=true);
-     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.1, h=sphere_phi_out+8, center=true);
+     rotate([0, 90, 0 ]) cylinder(d=6.2, h=sphere_phi_out+12, center=true);
+     rotate([90, 0, 0 ]) cylinder(d=6.2, h=sphere_phi_out+12, center=true);
+     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.2, h=sphere_phi_out+8, center=true);
+     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.2, h=sphere_phi_out+8, center=true);
      }
 }
 
 
 module focus_knob(){
 
-     translate([0, 0, 13]) cylinder(d=6, h=12, center=true);
+     translate([0, 0, 13]) difference() {
+          cylinder(d=6, h=12, center=true);
+          translate([0, 0, -6]) cylinder(d=2.9, h=4, center=true);
+     }
      translate([0, 0, 20.5]) difference(){
           cylinder(d=25, h=6, center=true);
           for (i = [0: 30: 330]){
@@ -176,7 +173,6 @@ module focus_knob(){
                }
      }
 
- rotate([0, 0, 180]) hex_adjustment_screw();
 }
 
 
@@ -213,7 +209,10 @@ module sequin(){
 lens_bfl = 5.2;
 
 module detection(){
-     translate([0, 0, 20]) focus_knob();
+     translate([0, 0, 20]) union() {
+          focus_knob();
+          rotate([0, 0, 180]) hex_adjustment_screw();
+     }
      translate([0, -8, 24]) cylinder(d=4, h=12.7, center=true);
      translate([0,  8, 24]) cylinder(d=4, h=12.7, center=true);
 

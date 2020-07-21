@@ -1,7 +1,6 @@
 use <dummies.scad>;
 use <detection.scad>;
 
-$fn=60;
 sphere_phi_out = 72;
 rail_phi = 100;
 sphere_phi_in = 62;
@@ -19,14 +18,13 @@ module ring(h, d_in, d_out){
 }
 
 module slider(){
-     translate([0, -sphere_phi_out/2+5-3, 0]) rotate([90, 0, 0]) union(){
-          cylinder(d=6, h=10, center=true);
-          translate([0, 0, -5]) cylinder(d=10, h=1, center=true);
-
+     translate([0, -sphere_phi_out/2+1, 0]) rotate([90, 0, 0]) difference(){
+          cylinder(d=6, h=8, center=true);
+          cylinder(d=4, h=12, center=true);
      }
      translate([0, 0, -stand_width/2]) difference(){
           cylinder(h=stand_width, d=rail_phi);
-          translate([0, 100-sphere_phi_out/2-3, 0]) cube([200, 200, 200], center=true);
+          translate([0, 100-sphere_phi_out/2-0.5, 0]) cube([200, 200, 200], center=true);
           translate([70, 0, 0]) cube(100, center=true);
           translate([-70, 0, 0]) cube(100, center=true);
           union(){
