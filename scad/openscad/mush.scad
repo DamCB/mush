@@ -5,15 +5,18 @@ use <grip.scad>;
 use <base.scad>;
 use <detection.scad>;
 $fn = 360;
-latitude = 0;
-
-//rotate([0, latitude, 0]) detection();
-//focus_knob();
+latitude = 30;
+longitude = 20;
 
 //camera_arc();
 //camera_stand();
-lens_75_stand();
+//lens_75_stand();
+//focus_knob();
 
 
-//sliders();
-//rail();                         /*  */
+rotate([0, 0, longitude]) union() {
+ rotate([0, latitude, 0]) detection();
+ sliders();
+}
+
+rail();                         /*  */
