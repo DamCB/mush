@@ -120,19 +120,17 @@ module camera_stand(){
                translate([0, 2, 1])
                     cube([stand_width, stand_width+5, 4], center=true);
           }
-          translate([0, 0, 5]) rotate([0, 0, 180]) union(){
-               translate([0, 2.5, 1.5]) cube([8.6, 13.6, 3], center=true);
+          translate([0, 0, 1.5]) rotate([0, 0, 180]) union(){
+               translate([0, 2.5, 1.5]) cube([9, 13.6, 3], center=true);
                translate([0, 0, -8]) cylinder(d=7.8, h=12);
-               //translate([0, 0, 3]) ring(6, 22, 30);
           }
-          translate([0, 0, 10]) adjuster_nut();
-          translate([0, 0, 10.1]) adjuster_nut();
+          translate([0, 0, 10.1]) cylinder(r=3.5, h=2.2, $fn=6);
           translate([0, 0, 12])
-               cylinder(d=2.8, h=10, center=true);
+               cylinder(d=4.1, h=10, center=true);
           translate([0, -8, 12])
-               cylinder(d=4.1, h=12, center=true);
+               cylinder(d=4.4, h=12, center=true);
           translate([0,  8, 12])
-               cylinder(d=4.1, h=18, center=true);
+               cylinder(d=4.4, h=18, center=true);
      }
 }
 
@@ -152,10 +150,10 @@ module camera_arc(){
                cube([10, 30, stand_width]);
      }
      translate([-sphere_phi_out/2-11, -20, -stand_width/2-1]) cube([10, 40, stand_width+2]);
-     rotate([0, 90, 0 ]) cylinder(d=6.2, h=sphere_phi_out+12, center=true);
-     rotate([90, 0, 0 ]) cylinder(d=6.2, h=sphere_phi_out+12, center=true);
-     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.2, h=sphere_phi_out+8, center=true);
-     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.2, h=sphere_phi_out+8, center=true);
+     rotate([0, 90, 0 ]) cylinder(d=6.5, h=sphere_phi_out+12, center=true);
+     rotate([90, 0, 0 ]) cylinder(d=6.5, h=sphere_phi_out+12, center=true);
+     translate([0, -8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.4, h=sphere_phi_out+8, center=true);
+     translate([0,  8, 0]) rotate([0, 90, 0 ]) cylinder(d=4.4, h=sphere_phi_out+8, center=true);
      }
 }
 
@@ -212,11 +210,12 @@ module detection(){
      translate([0, 0, 20]) union() {
           focus_knob();
           rotate([0, 0, 180]) hex_adjustment_screw();
+          adjuster_nut();
      }
+
      translate([0, -8, 24]) cylinder(d=4, h=12.7, center=true);
      translate([0,  8, 24]) cylinder(d=4, h=12.7, center=true);
 
-     translate([0, 0, 20]) adjuster_nut();
      camera_arc();
      translate([0, 0, 0]) rotate([0, 0, 0]) union() {
           translate([0, 0, 10]) union(){
@@ -230,4 +229,8 @@ module detection(){
      }
 }
 
-detection();
+$fn = 360;
+//detection();
+
+//camera_stand();
+camera_arc();
