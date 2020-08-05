@@ -82,7 +82,7 @@ difference() {
 	  sphere(phi_out/2);
 	  sphere(phi_in/2);
      }
-     translate([0, 0, -25]) cube([50, 50, 50], center=true);
+     translate([0, 0, -30]) cube([60, 60, 60], center=true);
      }
 }
 

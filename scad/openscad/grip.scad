@@ -95,7 +95,7 @@ module _hole(e=2., phi_sphere=20., clear=4.)
           }
      }
 }
-$fn = 360;
+$fn = 36;
 right_grip(e=2., phi_sphere=20., shift=3);
 left_grip(e=2., phi_sphere=20., shift=3);
 

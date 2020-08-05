@@ -2,7 +2,7 @@
 
 **Mush is a Usefull Sample Holder**
 
-A smartphone microscope sample holder design!
+3D micro-photogrammetry
 
 <hr/>
 
