@@ -57,16 +57,30 @@ module camera(){
      }
 }
 
-module base_plate(){
-     difference(){
-          cylinder(d=phi_ext, h=6);
-          for (i=[0:5])
-               rotate([0, 0, 60*i]) translate([-phi_ext/2+1, 0, 0.9])
-                    union(){
-                    translate([0, -3.5, -1]) cylinder(h=10, d=3);
-                    translate([0, 3.5, -1]) cylinder(h=10, d=3);
-               }
-     }
+
+
+// This is a crudely simply metric thread
+// not ISO
+module metric_thread(diameter=8, pitch=1, length=1,
+    internal=false, n_starts=1)
+{
+   // Number of turns needed.
+   n_turns = floor(length/pitch);
+   n_segments = $fn;
+   h = pitch * cos(30);
+
+   union()
+   {
+
+       // Solid center, including Dmin truncation.
+       if (internal) {
+           cylinder(r=diameter/2 - h*5/8, h=length, $fn=n_segments);
+       } else {
+
+           // External thread includes additional relief.
+           cylinder(r=diameter/2 - h*5.3/8, h=length, $fn=n_segments);
+       }
+   }
 }
 
 
@@ -169,18 +183,12 @@ module lens_75(){
 }
 
 
-<<<<<<< HEAD
 module lens_75_stand(){
      difference(){
           translate([0, 0, 2.]) cube([stand_width, stand_width, 4], center=true);
           translate([0, 0, -2]) cylinder(d=9.3, h=5.2);
           translate([0, 0, -2]) cylinder(d=8., h=12);
      }
-=======
-module leds_sequins(){
-     for (i=[0:2])
-          rotate([0, 0, 180*i]) translate([-10, 0, -1]) sequin();
->>>>>>> b367fb4 (openscad changes)
 }
 
 //
@@ -205,7 +213,6 @@ module detection(){
           adjuster_nut();
      }
 
-<<<<<<< HEAD
      translate([0, -8, 24]) cylinder(d=4, h=12.7, center=true);
      translate([0,  8, 24]) cylinder(d=4, h=12.7, center=true);
 
@@ -221,31 +228,9 @@ module detection(){
           }
      }
 }
-=======
-translate([0, 0, -15]) camera();
-lens_75();
-leds_sequins();
-//difference(){
-//     union(){
-//
-//color([0.1, 0.1, 0.6]) {translate([0, 0, 0.1]) leds_sequins();}
-//sequins_stand();
-//color(c=[0.4, 0.8, 0.4]) {detection();}
-//
-//%color(c=[0.8, 0.1, 0.1]) {lens_75();}
-//translate([0, 0, 2.1]) ring(1, 22.9, phi_ext);
-//     }
-//     translate([-30, 0, 0]) cube([60, 60, 60], center=true);
-//}
-
->>>>>>> b367fb4 (openscad changes)
 
 $fn = 360;
 //detection();
-<<<<<<< HEAD
 
 //camera_stand();
 camera_arc();
-=======
-//sequins_stand();
->>>>>>> b367fb4 (openscad changes)

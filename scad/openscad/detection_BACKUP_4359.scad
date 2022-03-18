@@ -57,6 +57,32 @@ module camera(){
      }
 }
 
+<<<<<<< HEAD
+
+
+// This is a crudely simply metric thread
+// not ISO
+module metric_thread(diameter=8, pitch=1, length=1,
+    internal=false, n_starts=1)
+{
+   // Number of turns needed.
+   n_turns = floor(length/pitch);
+   n_segments = $fn;
+   h = pitch * cos(30);
+
+   union()
+   {
+
+       // Solid center, including Dmin truncation.
+       if (internal) {
+           cylinder(r=diameter/2 - h*5/8, h=length, $fn=n_segments);
+       } else {
+
+           // External thread includes additional relief.
+           cylinder(r=diameter/2 - h*5.3/8, h=length, $fn=n_segments);
+       }
+   }
+=======
 module base_plate(){
      difference(){
           cylinder(d=phi_ext, h=6);
@@ -67,6 +93,7 @@ module base_plate(){
                     translate([0, 3.5, -1]) cylinder(h=10, d=3);
                }
      }
+>>>>>>> b367fb4 (openscad changes)
 }
 
 
