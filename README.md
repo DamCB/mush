@@ -1,19 +1,15 @@
 # mush
 
-**Mush is a Usefull Sample Holder**
+**Mush is a 3D micro-photogrammetry tool**
 
-3D micro-photogrammetry
 
 <hr/>
 
-The idea is to have an easy to handle, orientable sample holder
-for the mu-spim.
+This object as now evolved in a full fledge microscope. The goal is to be able to move around a sample with the microscope —
 
-### Current state
 
-![early view](png/mush.png)
 
 
 CC-BY-SA-NC for now.
 
-&copy; Guillaume Gay 2017.
+&copy; Guillaume Gay 2017-2022.
