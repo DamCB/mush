@@ -1,0 +1,7 @@
+name: mush
+channels:
+- conda-forge
+
+dependencies:
+- pip:
+    - microscope
